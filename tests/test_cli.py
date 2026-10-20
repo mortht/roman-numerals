@@ -38,6 +38,36 @@ def test_usage(a, capsys):
     assert c.out == "" and "usage" in c.err
 
 
+@pytest.mark.parametrize("v", ["9" * 5000, "-" + "9" * 5000])
+def test_huge_digits(v, capsys):
+    assert main([v]) == 2
+    c = capsys.readouterr()
+    assert c.out == "" and "1-3999" in c.err
+    assert len(c.err.strip().splitlines()) == 1
+
+
+@pytest.mark.parametrize("v", ["x" * 5000, "   ", "é", "٣", "V I"])
+def test_odd_inputs(v, capsys):
+    assert main([v]) == 2
+    c = capsys.readouterr()
+    assert c.out == "" and c.err.startswith("error: ")
+    assert len(c.err.strip().splitlines()) == 1
+
+
+@pytest.mark.parametrize("args", [[], ["1", "2"]])
+def test_subprocess_usage(args):
+    r = subprocess.run([sys.executable, "-m", "roman_cli", *args],
+                       capture_output=True, text=True)
+    assert r.returncode == 2 and r.stdout == ""
+    assert "usage" in r.stderr and len(r.stderr.strip().splitlines()) == 1
+
+
+def test_subprocess_huge():
+    r = subprocess.run([sys.executable, "-m", "roman_cli", "9" * 5000],
+                       capture_output=True, text=True)
+    assert r.returncode == 2 and "Traceback" not in r.stderr
+
+
 def test_subprocess():
     r = subprocess.run([sys.executable, "-m", "roman_cli", "-5"],
                        capture_output=True, text=True)

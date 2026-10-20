@@ -20,6 +20,8 @@ def main(argv: list[str] | None = None) -> int:
     try:
         body = value[1:] if value.startswith("-") else value
         if body and _is_ascii_digits(body):
+            if len(body) > 10:  # avoid int() digit limit; surely out of range
+                raise RomanError("number out of range; valid range is 1-3999")
             result = int_to_roman(int(value))
         elif value.isascii() and value.isalpha():
             result = str(roman_to_int(value))

@@ -2,4 +2,5 @@ import sys
 
 from roman_cli.cli import main
 
-sys.exit(main())
+if __name__ == "__main__":
+    sys.exit(main())
