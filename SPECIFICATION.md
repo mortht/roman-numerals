@@ -6,9 +6,7 @@ A Python command-line tool that converts integers 1-3999 to Roman numerals and R
 
 ## User stories
 
-Stories marked _not implemented yet_ are specified but not built: their tasks haven't run or didn't get done. The next run on this project plans them again.
-
-### US-1 (must) · not implemented yet
+### US-1 (must)
 
 As **CLI user**, I want **to convert an integer from 1 to 3999 to a Roman numeral**, so that I can get its Roman representation.
 
@@ -19,7 +17,7 @@ Acceptance criteria:
 - 0, negative numbers and 4000 or more are rejected with an error message stating the valid range 1-3999
 - Non-integer input (e.g. 'abc', '3.5', empty string) is rejected with a clear error
 
-### US-2 (must) · not implemented yet
+### US-2 (must)
 
 As **CLI user**, I want **to convert a Roman numeral to an integer**, so that I can read Roman numerals as numbers.
 
@@ -32,7 +30,7 @@ Acceptance criteria:
 - Non-canonical forms such as IIII, VX, IC, IIX, VV, MMMM are rejected as invalid Roman numerals
 - Empty string is rejected
 
-### US-3 (must) · not implemented yet
+### US-3 (must)
 
 As **CLI user or script**, I want **errors reported clearly on stderr with a non-zero exit code**, so that I can tell failures from successes and understand them.
 
