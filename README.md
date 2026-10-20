@@ -6,7 +6,8 @@ The argument type is detected automatically.
 ## Features
 
 - Integer to Roman numeral (1–3999), uppercase output.
-- Roman numeral to integer; input is case-insensitive, surrounding whitespace is ignored.
+- Roman numeral to integer; input is case-insensitive. On the command line, whitespace around the value is rejected as invalid input (only `roman_to_int` called from Python strips surrounding whitespace).
+- Input detection in the CLI: an ASCII integer (an optional leading `-` is allowed) is converted to Roman; an ASCII alphabetic string is converted to an integer; anything else gives `error: invalid input: '<value>'`. Integers with more than 10 digits give `error: number out of range; valid range is 1-3999`.
 - Only canonical numerals are accepted (e.g. `IIII` and `IC` are rejected).
 - Errors are printed as a single line `error: <message>` on stderr; exit code 2 for any invalid input or usage error, 0 on success.
 
@@ -14,7 +15,7 @@ The argument type is detected automatically.
 
 - Python 3.14 or newer (`requires-python = ">=3.14"`).
 - No runtime dependencies (standard library only); pytest is needed for the tests.
-- No build step: run from the project root. Optionally `pip install .` using `pyproject.toml`.
+- No build step: run from the project root with `python -m roman_cli`. The project is not set up for `pip install` (no build system configured) and installs no console script.
 
 ## Usage
 
